@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #4A90E2;
+            font-size: 36px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        table {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid white;
+            vertical-align: middle;
+            color: #333;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn {
+            background-color: #4A90E2;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #357ABD;
+        }
+
+        .like-count {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 align="center">Read Post</h1>
+    <table align="center" border="1">
+        <tr>
+            <th>Sr. no.</th>
+            <th>user</th>
+            <th>image</th>
+            <th>caption</th>
+            <th>created_at</th>
+            <th>updated_at</th>
+            <th>no_of_likes</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for x in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td> {{x.user}}</td>
+            <td> <a href="/read_post_detail/{{x.id}}"><img src="{{x.image.url}}" width="200px" height="200px"></a></td>
+            <td> {{x.caption}}</td>
+            <td> {{x.created_at}}</td>
+            <td> {{x.updated_at}}</td>
+            <td>{{x.no_of_likes}}
+
+            </td>
+
+            <td> <a href="/update_post/{{x.id}}">update</a></td>
+            <td> <a href="/delete_post/{{x.id}}">delete</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

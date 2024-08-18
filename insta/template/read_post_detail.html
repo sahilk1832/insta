@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: #ffffff; /* White background for the content area */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td, th {
+            padding: 10px;
+            border: 2px solid #ccc;
+            text-align: left;
+        }
+
+        .like-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .like-btn:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table align="center" width="90%" border="2">
+
+
+        {% for x in data %}
+
+        <tr>
+            <td align="center" colspan="2">{{ x.user }}</td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><img src="{{ x.image.url }}" alt="" height="300px" width="300px"></td>
+        </tr>
+
+        <tr>
+            <td> <span><b>{{x.user }}</b></span> </td>
+            <td>{{ x.caption }}</td>
+        </tr>
+
+        <tr>
+
+            <td> Likes : {{x.no_of_likes}}
+
+
+
+                <div class="post">
+                    <form action="/likes_count/{{x.id}}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <button type="submit" class="like-btn">
+                            {% if user_has_liked %}
+                            Unlike
+                            {% else %}
+                            Like
+                            {% endif %}
+                        </button>
+                    </form>
+
+                </div>
+            </td>
+
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table align="center" border="2">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            <tr>
+                <th>Comments</th>
+                <td><input type="text" name="comments"></td>
+            </tr>
+            <tr>
+                <th colspan="2"><input type="submit" value="submit"></th>
+            </tr>
+        </form>
+
+    </table>
+
+    <h3>Comment :</h3>
+    {% for c in comment %}
+    <ul>
+        <li>{{c.comments}}</li>
+    </ul>
+
+
+    {% endfor %}
+
+
+
+
+    {% endfor %}
+
+
+
+
+</body>
+
+</html>

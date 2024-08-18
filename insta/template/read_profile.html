@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            animation: backgroundFade 10s infinite;
+        }
+
+        @keyframes backgroundFade {
+            0% {
+                background-color: #f4f4f9;
+            }
+
+            25% {
+                background-color: #e0f7fa;
+            }
+
+            50% {
+                background-color: #fce4ec;
+            }
+
+            75% {
+                background-color: #fff3e0;
+            }
+
+            100% {
+                background-color: #f4f4f9;
+            }
+        }
+
+        h1 {
+            color: #4A90E2;
+            font-size: 36px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        ul li {
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .like-btn {
+            background-color: #4A90E2;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .like-btn:hover {
+            background-color: #357ABD;
+            transform: scale(1.05);
+        }
+
+        img {
+            margin-top: 20px;
+            border-radius: 8px;
+            animation: fadeIn 2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{ profile.user.username }}'s Profile</h1>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Location:</strong> {{ profile.location }}</p>
+    <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
+    <h2>Followers</h2>
+    <ul>
+        {% for follow in followers %}
+        <li>{{follow.follower.username}}</li>
+        {% endfor %}
+    </ul>
+    <h2> Following </h2>
+    <ul>
+        {% for follow in following %}
+        <li>{{ follow.following.username }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <form action="/follow_user/{{profile.user.id}}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="profile_id" value="{{ profile.id }}">
+        <button type="submit" class="like-btn">
+            {% if user_has_liked %}
+            Unfollow
+            {% else %}
+            Follow
+            {% endif %}
+        </button>
+    </form>
+
+    <p> <strong> Following </strong> </p>
+    <img src="{{ profile.profile_img.url }} " alt="Profile image" height="200px" width="250px">
+</body>
+
+</html>
