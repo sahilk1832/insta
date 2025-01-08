@@ -7,8 +7,7 @@
     <title>Document</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: cursive;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,11 +15,19 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background-image: url('https://img.freepik.com/free-photo/abstract-dark-background-with-flowing-colouful-waves_1048-13124.jpg?t=st=1735899829~exp=1735903429~hmac=b0547b8b1d92e392a687ebbdcdb22f8cb8a4500d2aac8070b1cf9dea6d4c2886&w=900');
+            background-size: cover;
+            width: 100%;
+
         }
 
         h1 {
+            font-family: fantasy;
+            letter-spacing: 2px;
+            font-size: 2rem;
+            font-weight: 900;
             text-align: center;
-            color: #ff6347;
+            color: rgb(140, 68, 140);
             /* Change this color to your desired color */
             margin-bottom: 20px;
         }
@@ -62,7 +69,7 @@
 
         input[type="submit"] {
             width: 100%;
-            background-color: #4CAF50;
+            background-color: rgb(56, 2, 56);
             color: white;
             padding: 10px;
             margin: 4px 0;
@@ -73,7 +80,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: rgb(165, 79, 165);
         }
 
         h3 {
@@ -83,12 +90,13 @@
         }
 
         a {
-            color: #4CAF50;
+            color: rgb(86, 30, 86);
             text-decoration: none;
         }
 
         a:hover {
             text-decoration: underline;
+            color: violet;
         }
     </style>
 </head>
@@ -113,7 +121,7 @@
         </form>
     </table>
     <h3 align="center"> {{error}} </h3>
-    <h3 align="center"><a href="/forgot_password">Forgot Password</a></h3>
+    <h3 align="center"><a href="/forgot_password">Forgot Password ?</a></h3>
 </body>
 
 </html>

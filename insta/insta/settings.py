@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'insta_01',
+        'NAME': 'insta_03',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '',
@@ -134,8 +134,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sahilkachare7798@gmail.com'
-EMAIL_HOST_PASSWORD = 'xgjp mhzq hcar lwab'
+EMAIL_HOST_PASSWORD = 'uutb cpwt pmze kzyl'
 
 
 KEY_ID = 'rzp_test_O7VXnLro6YpOsW'
 KEY_SECRET = 'ktioivPel2lnr63dE6myRI2V'
+
+RAZORPAY_API_KEY = 'rzp_test_fBr8UcWb120vqn'
+RAZORPAY_API_SECRET = 'RJs6LFgeFKjHTBo4qJ1jkPQB'    

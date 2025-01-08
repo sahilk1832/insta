@@ -9,7 +9,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
+
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
@@ -17,22 +18,23 @@
 
         /* Navbar Styles */
         .navbar {
-            background-color: #007bff;
-            /* Vibrant blue color */
+            background-color: black;
+
         }
 
         .navbar a {
-            color: white !important;
+            color: black;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            color: #333 !important;
-            background-color: #e9ecef !important;
+            color: white;
+            background-color: black;
         }
 
         /* Content Styles */
         .content {
+            background-color: #a7c3e0;
             padding: 40px 20px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
@@ -52,7 +54,7 @@
 
         /* Footer Styles */
         .footer {
-            background-color: #343a40;
+            background-color: red;
             /* Dark gray color */
             color: #f8f9fa;
             text-align: center;
@@ -63,7 +65,7 @@
         }
 
         .footer a {
-            color: #f8f9fa;
+            color: #faf8f9;
             text-decoration: none;
         }
 
@@ -81,9 +83,10 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+    
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated%}
                 <li class="nav-item">
                     <a class="nav-link" href="/create_post">Post</a>
                 </li>
@@ -99,21 +102,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/u_logout">Logout</a>
                 </li>
-                {% else %}
+              {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/u_login">Login</a>
                 </li>
-                {% endif %}
+              {% endif %}
             </ul>
         </div>
     </nav>
 
+
+
     <!-- Content -->
     <div class="content">
-        <h1>Welcome to Social Media</h1>
+        <h1>INSTA-GRAM</h1>
 
     </div>
 

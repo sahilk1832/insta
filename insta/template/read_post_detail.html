@@ -8,7 +8,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Light grey background */
+            background-color: grey;
+            /* Light grey background */
             margin: 0;
             padding: 0;
         }
@@ -16,7 +17,8 @@
         .container {
             width: 90%;
             margin: 20px auto;
-            background-color: #ffffff; /* White background for the content area */
+            background-color: #ffffff;
+            /* White background for the content area */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,7 +38,8 @@
             margin-bottom: 20px;
         }
 
-        td, th {
+        td,
+        th {
             padding: 10px;
             border: 2px solid #ccc;
             text-align: left;
@@ -118,30 +121,23 @@
     </table>
     <br>
     <br>
-    <table align="center" border="2">
 
-        <form method="POST" enctype="multipart/form-data">
-
+    <div class="comments-section">
+        <form action="/read_post_detail/{{x.id}}" method="POST">
             {% csrf_token %}
-            <tr>
-                <th>Comments</th>
-                <td><input type="text" name="comments"></td>
-            </tr>
-            <tr>
-                <th colspan="2"><input type="submit" value="submit"></th>
-            </tr>
+            <input type="text" name="comments" placeholder="Add a comment...">
+            <input type="submit" value="Submit">
         </form>
+        <h3>Comments:</h3>
+        {% for c in comment %}
+        <ul>
+            <li><strong>{{c.user.username}} : </strong>{{c.comments}}</li>
+        </ul>
+        {% endfor %}
+    </div>
 
-    </table>
-
-    <h3>Comment :</h3>
-    {% for c in comment %}
-    <ul>
-        <li>{{c.comments}}</li>
-    </ul>
 
 
-    {% endfor %}
 
 
 

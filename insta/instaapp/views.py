@@ -6,17 +6,17 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime,timezone
 from django.core.mail import get_connection,EmailMessage
 from django.conf import settings
-import random
+import random,razorpay
 
 
 # Create your views here.
 def index(request):
+    
     return render(request,'index.html')
 
 def register(request):
-    if request.method == 'GET':
-        
-     return render(request,'register.html')
+    if request.method == 'GET': 
+        return render(request,'register.html')
     else:
         username = request.POST['username']
         request.session['username']= username
@@ -33,12 +33,18 @@ def register(request):
         else:
             context = {}
             context['error']= 'password and confirm password are not match'
-            return render(request,'register.html',context)
+            return redirect('/register')
+        
+        
+        
+        9
    
 def u_login(request):
     if request.method == 'GET':
      return render(request,'login.html')
+ 
     else:
+        
          username = request.POST['username']
          password = request.POST['password']
          user = authenticate(username=username,password=password)
@@ -186,7 +192,6 @@ def read_profile(request):
     return render(request, 'read_profile.html', {'profile': profile})
 
 
-def show_users(request):
     
     # user = User.objects.all()
     
@@ -229,7 +234,35 @@ def show_detail_users(request, rid):
     return render(request, 'show_detail_users.html', context)
 
 @login_required(login_url="/login") 
- 
+def follow_user(request,rid):
+    user_follow = User.objects.get(username = request.user.username)
+    profile = Profile.objects.get(id = rid)
+    follow_relation = Follow.objects.filter(follower=user_follow, following = profile.user).first()
+    
+    
+    if follow_relation is None:
+        Follow.objects.create(following = profile.user, follower = user_follow)
+        profile.no_of_followers += 1
+        profile.save()
+        
+        
+        
+        user_profile = Profile.objects.get(user = user_follow)
+        user_profile.no_of_following += 1
+        user_profile.save()
+    
+    else:
+        follow_relation.delete()
+        
+        profile.no_of_followers -= 1
+        profile.save()
+        
+        user_profile = Profile.objects.get(user = user_follow)
+        user_profile.no_of_following -= 1
+        user_profile.save()
+    
+    
+    return redirect('/show_users')
     
     
 
@@ -289,12 +322,14 @@ def update_post(request,rid):
     
 def read_post_detail(request, rid):
     
-    log = Post.objects.filter(id = rid)     #use for to send in html
-    c = Comment.objects.all().order_by('-created_at')
+    log = Post.objects.filter(id = rid)  #use for to send in html
+    c = Post.objects.get(id = rid)
+    p = Profile.objects.filter(id = rid)
+    c = Comment.objects.filter(post_id = c).order_by('-created_at')
     context = {}
     
     context['data'] = log
-
+    context['profile'] = p
     context['comment'] = c 
     if request.method == 'GET':
         
@@ -327,7 +362,10 @@ def likes_count(request, post_id):
         post.no_of_likes -= 1
     
     post.save()
-    return redirect('/read_post')    
+    return redirect('/read_post')   
+
+
+ 
 
 
 

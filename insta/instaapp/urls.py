@@ -23,6 +23,7 @@ urlpatterns = [
     path('delete_post/<rid>',views.delete_post),
     path('update_post/<rid>',views.update_post),
     path('follow_user/<rid>', views.follow_user),
+    
    
    
 ]
